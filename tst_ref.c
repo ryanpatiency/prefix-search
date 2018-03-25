@@ -216,34 +216,7 @@ static void *tst_del_word(tst_node **root,
  *  of 's' from tree.
  */
 // A recursive function to traverse Ternary Search Tree
-void traverseTSTUtil(struct Node* root, char* buffer, int depth)
-{
-    if(root) {
-        // First traverse the left subtree
-        traverseTSTUtil(root->left, buffer, depth);
 
-        // Store the character of this node
-        buffer[depth] = root->data;
-        if(root->isEndOfString) {
-            buffer[depth + 1] = '\0';
-            printf("%s\n", buffer);
-        }
-
-        // Traverse the subtree using equal pointer (middle subtree)
-        traverseTSTUtil(root->eq, buffer, depth + 1);
-
-        // Finally Traverse the right subtree
-        traverseTSTUtil(root->right, buffer, depth);
-    }
-}
-
-// The main function to traverse a Ternary Search Tree.
-// It mainly uses traverseTSTUtil()
-void traverseTST(struct Node* root)
-{
-    char buffer[MAX];
-    traverseTSTUtil(root, buffer, 0);
-}
 
 void *tst_ins_del(tst_node **root, char *const *s, const int del, const int cpy)
 {
@@ -339,6 +312,35 @@ void *tst_search(const tst_node *p, const char *s)
     return NULL;
 }
 
+static void tst_traverse(tst_node *root, char* buffer, int depth,
+                         char **a, int *n, const int max)
+{
+    if(root && *n < max) {
+        // First traverse the left subtree
+        tst_traverse(root->lokid, buffer, depth, a, n, max);
+
+        // Store the character of this node
+        buffer[depth] = root->key;
+        if(root->key == '\0') {
+            a[*n++] = strdup(buffer);
+        }
+
+        // Traverse the subtree using equal pointer (middle subtree)
+        tst_traverse(root->eqkid, buffer, depth + 1, a, n, max);
+
+        // Finally Traverse the right subtree
+        tst_traverse(root->hikid, buffer, depth, a, n, max);
+    }
+}
+
+// The main function to traverse a Ternary Search Tree.
+// It mainly uses traverseTSTUtil()
+//static void tst_traverse(tst_node *root)
+//{
+//    char buffer[WRDMAX];
+//    traverseTSTUtil(root, buffer, 0);
+//}
+
 /** fill ptr array 'a' with strings matching prefix at node 'p'.
  *  the 'a' array will hold pointers to stored strings with prefix
  *  matching the string passed to tst_matching, ending in 'c', the
@@ -396,7 +398,8 @@ void *tst_search_prefix(const tst_node *root,
             /* check if prefix number of chars reached */
             if ((size_t)(s - start) == nchr - 1) {
                 /* call tst_suggest to fill a with pointer to matching words */
-                tst_suggest(curr, curr->key, nchr, a, n, max);
+                char buffer[WRDMAX];
+                tst_traverse(curr, buffer, 0, a, n, max);
                 return (void *) curr;
             }
             if (*s == 0) /* no matching prefix found in tree */
