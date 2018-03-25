@@ -379,6 +379,8 @@ void *tst_search_prefix(const tst_node *root,
 {
     const tst_node *curr = root;
     const char *start = s;
+    char buffer[WRDMAX];
+    int depth = 0;
 
     if (!*s)
         return NULL;
@@ -398,14 +400,13 @@ void *tst_search_prefix(const tst_node *root,
             /* check if prefix number of chars reached */
             if ((size_t)(s - start) == nchr - 1) {
                 /* call tst_suggest to fill a with pointer to matching words */
-                char buffer[WRDMAX];
-                tst_traverse(curr, buffer, 0, a, n, max);
+
+                tst_traverse(curr, buffer, depth, a, n, max);
                 return (void *) curr;
             }
             if (*s == 0) /* no matching prefix found in tree */
                 return (void *) curr->eqkid;
-
-            s++;
+            buffer[depth++] = *s++;
             curr = curr->eqkid;
         } else if (diff < 0) /* handle the less than case */
             curr = curr->lokid;
