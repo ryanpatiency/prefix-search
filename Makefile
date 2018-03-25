@@ -49,8 +49,12 @@ bench:
 bench-loadtime:
 	./scripts/measure_load_time.sh
 
+gen-cmd:
+	gcc -o gen_cmd gen_cmd.c && ./gen_cmd
+
 clean:
 	$(RM) $(TESTS) $(OBJS)
 	$(RM) $(deps)
+	$(RM) gen_cmd
 
 -include $(deps)
