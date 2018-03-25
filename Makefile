@@ -41,10 +41,13 @@ test_%: test_%.o tst_%.o
 	$(Q)$(CC) -o $@ $(CFLAGS) -c -MMD -MF .$@.d $<
 
 bench:
-	 echo 3 | sudo tee /proc/sys/vm/drop_caches
+	echo 3 | sudo tee /proc/sys/vm/drop_caches
 	./test_ref < command.txt
-	 echo 3 | sudo tee /proc/sys/vm/drop_caches
+	echo 3 | sudo tee /proc/sys/vm/drop_caches
 	./test_cpy < command.txt
+
+bench-loadtime:
+	./scripts/measure_load_time.sh
 
 clean:
 	$(RM) $(TESTS) $(OBJS)
