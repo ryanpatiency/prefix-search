@@ -6,12 +6,14 @@
 #include "tst.h"
 
 /** constants insert, delete, max word(s) & stack nodes */
-enum { INS, DEL, WRDMAX = 256, STKMAX = 512, LMAX = 1024 };
+
 #define REF INS
 #define CPY DEL
 //#define IN_FILE "cities.txt"
 #define IN_FILE "abc.txt"
-
+enum {
+    INS, DEL, WRDMAX = 256, STKMAX = 512, LMAX = 1024
+};
 
 /* timing helper function */
 static double tvgetf(void)

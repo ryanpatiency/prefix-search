@@ -5,9 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern enum {
-    INS, DEL, WRDMAX = 256, STKMAX = 512, LMAX = 1024
-};
 
 /* forward declaration of ternary search tree */
 typedef struct tst_node tst_node;

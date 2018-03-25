@@ -283,7 +283,7 @@ void *tst_ins_del(tst_node **root, char *const *s, const int del, const int cpy)
                 return (void *) eqdata;
             } else { /* save pointer to 's' (allocated elsewhere) */
 //                curr->eqkid = (tst_node *) *s;
-                return 1;
+                return (void *)1; // return success value
             }
         }
         pcurr = &(curr->eqkid);
@@ -312,7 +312,7 @@ void *tst_search(const tst_node *p, const char *s)
     return NULL;
 }
 
-static void tst_traverse(tst_node *root, char* buffer, int depth,
+static void tst_traverse(const tst_node *root, char* buffer, int depth,
                          char **a, int *n, const int max)
 {
     if(root && *n < max) {
