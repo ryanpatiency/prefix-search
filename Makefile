@@ -23,17 +23,16 @@ $(GIT_HOOKS):
 	@scripts/install-git-hooks
 	@echo
 
-OBJS_LIB = \
-    tst.o
 
 OBJS := \
-    $(OBJS_LIB) \
+    tst_cpy.o \
+    tst_ref.o \
     test_cpy.o \
     test_ref.o
 
 deps := $(OBJS:%.o=.%.o.d)
 
-test_%: test_%.o $(OBJS_LIB)
+test_%: test_%.o tst_%.o
 	$(VECHO) "  LD\t$@\n"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^
 
