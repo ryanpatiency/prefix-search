@@ -126,8 +126,10 @@ int main(int argc, char **argv)
             t2 = tvgetf();
             if (res) {
                 printf("  %s - searched prefix in %.6f sec\n\n", word, t2 - t1);
-                for (int i = 0; i < sidx; i++)
+                for(int i = 0; i < sidx; i++) {
                     printf("suggest[%d] : %s\n", i, sgl[i]);
+                    free(sgl[i]);
+                }
             } else
                 printf("  %s - not found\n", word);
             break;
