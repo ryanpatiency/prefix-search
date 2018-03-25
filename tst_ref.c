@@ -322,7 +322,7 @@ static void tst_traverse(const tst_node *root, char* buffer, int depth,
         // Store the character of this node
         buffer[depth] = root->key;
         if(root->key == '\0') {
-            a[*n++] = strdup(buffer);
+            a[(*n)++] = strdup(buffer);
         }
 
         // Traverse the subtree using equal pointer (middle subtree)
