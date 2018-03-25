@@ -41,7 +41,7 @@ test_%: test_%.o tst_%.o
 	$(Q)$(CC) -o $@ $(CFLAGS) -c -MMD -MF .$@.d $<
 
 bench:
-	./test_cpy < command.txt 
+	./test_ref < command.txt 
 
 clean:
 	$(RM) $(TESTS) $(OBJS)
