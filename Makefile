@@ -40,6 +40,9 @@ test_%: test_%.o tst_%.o
 	$(VECHO) "  CC\t$@\n"
 	$(Q)$(CC) -o $@ $(CFLAGS) -c -MMD -MF .$@.d $<
 
+bench:
+	./test_cpy < command.txt 
+
 clean:
 	$(RM) $(TESTS) $(OBJS)
 	$(RM) $(deps)

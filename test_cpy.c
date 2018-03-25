@@ -150,6 +150,7 @@ int main(int argc, char **argv)
             break;
         case 'q':
             tst_free_all(root);
+            printf("\n");
             return 0;
             break;
         default:
@@ -157,6 +158,5 @@ int main(int argc, char **argv)
             break;
         }
     }
-
     return 0;
 }
