@@ -41,7 +41,10 @@ test_%: test_%.o tst_%.o
 	$(Q)$(CC) -o $@ $(CFLAGS) -c -MMD -MF .$@.d $<
 
 bench:
-	./test_ref < command.txt 
+	 echo 3 | sudo tee /proc/sys/vm/drop_caches
+	./test_ref < command.txt
+	 echo 3 | sudo tee /proc/sys/vm/drop_caches
+	./test_cpy < command.txt
 
 clean:
 	$(RM) $(TESTS) $(OBJS)

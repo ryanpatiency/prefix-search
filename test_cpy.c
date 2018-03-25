@@ -9,8 +9,8 @@
 enum { INS, DEL, WRDMAX = 256, STKMAX = 512, LMAX = 1024 };
 #define REF INS
 #define CPY DEL
-//#define IN_FILE "cities.txt"
-#define IN_FILE "abc.txt"
+#define IN_FILE "cities.txt"
+//#define IN_FILE "abc.txt"
 
 
 /* timing helper function */

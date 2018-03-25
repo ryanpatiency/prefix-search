@@ -241,7 +241,7 @@ void *tst_ins_del(tst_node **root, char *const *s, const int del, const int cpy)
                     return tst_del_word(root, curr, &stk, 1);
                 } else
                     curr->refcnt++; /* increment refcnt if word exists */
-                return (void *) curr->eqkid; /* pointer to word / NULL on del */
+                return (void *)1; /* pointer to word / NULL on del */
             }
             pcurr = &(curr->eqkid); /* get next eqkid pointer address */
         } else if (diff < 0) {      /* if char less than node->key */
@@ -284,6 +284,8 @@ void *tst_ins_del(tst_node **root, char *const *s, const int del, const int cpy)
             } else { /* save pointer to 's' (allocated elsewhere) */
 //                curr->eqkid = (tst_node *) *s;
                 return (void *)1; // return success value
+//                curr->eqkid = (tst_node *)*s;
+//                return (void *)*s;
             }
         }
         pcurr = &(curr->eqkid);
