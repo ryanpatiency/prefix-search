@@ -215,6 +215,36 @@ static void *tst_del_word(tst_node **root,
  *  non-zero), NULL on allocation failure on insert, or on successful removal
  *  of 's' from tree.
  */
+// A recursive function to traverse Ternary Search Tree
+void traverseTSTUtil(struct Node* root, char* buffer, int depth)
+{
+    if(root) {
+        // First traverse the left subtree
+        traverseTSTUtil(root->left, buffer, depth);
+
+        // Store the character of this node
+        buffer[depth] = root->data;
+        if(root->isEndOfString) {
+            buffer[depth + 1] = '\0';
+            printf("%s\n", buffer);
+        }
+
+        // Traverse the subtree using equal pointer (middle subtree)
+        traverseTSTUtil(root->eq, buffer, depth + 1);
+
+        // Finally Traverse the right subtree
+        traverseTSTUtil(root->right, buffer, depth);
+    }
+}
+
+// The main function to traverse a Ternary Search Tree.
+// It mainly uses traverseTSTUtil()
+void traverseTST(struct Node* root)
+{
+    char buffer[MAX];
+    traverseTSTUtil(root, buffer, 0);
+}
+
 void *tst_ins_del(tst_node **root, char *const *s, const int del, const int cpy)
 {
     int diff;
@@ -279,8 +309,8 @@ void *tst_ins_del(tst_node **root, char *const *s, const int del, const int cpy)
                 curr->eqkid = (tst_node *) eqdata;
                 return (void *) eqdata;
             } else { /* save pointer to 's' (allocated elsewhere) */
-                curr->eqkid = (tst_node *) *s;
-                return (void *) *s;
+//                curr->eqkid = (tst_node *) *s;
+                return 1;
             }
         }
         pcurr = &(curr->eqkid);
