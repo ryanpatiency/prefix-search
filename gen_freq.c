@@ -6,7 +6,7 @@
 #define OUT_CPY_FILE "cpy_freq.txt"
 #define MAX 256
 
-double hi_bound = 0.00021;
+double hi_bound = 0.000021;
 double n = 10;
 
 int get_idx(double time)
