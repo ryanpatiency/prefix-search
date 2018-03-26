@@ -9,4 +9,4 @@ set boxwidth 0.9
 set xtic rotate by -45 scale 0
 set term png enhanced font 'Verdana,10'
 set output 'ref_freq.png'
-plot 'ref_freq.txt' using 2:xtic(1)
+plot 'ref_freq.txt' using 2:xtic(1) ti 'REF', 'cpy_freq.txt' u 2:xtic(1) ti 'CPY'

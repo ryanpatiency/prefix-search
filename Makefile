@@ -51,12 +51,16 @@ bench-loadtime:
 
 gen-cmd:
 	gcc -o gen_cmd gen_cmd.c && ./gen_cmd
-	
+
 gen-freq:
 	gcc -o gen_freq gen_freq.c && ./gen_freq
+	
+plot-freq: gen-freq
+	gnuplot ./scripts/freq.gp
 
 style:
 	astyle --style=kr --indent=spaces=4 --suffix=none *.c *.h
+
 
 clean:
 	$(RM) $(TESTS) $(OBJS)
