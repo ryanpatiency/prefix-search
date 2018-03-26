@@ -56,7 +56,7 @@ gen-freq:
 	gcc -o gen_freq gen_freq.c && ./gen_freq
 	
 plot-freq: gen-freq
-	gnuplot ./scripts/freq.gp
+	gnuplot ./scripts/freq.gp && eog ./freq.png
 
 style:
 	astyle --style=kr --indent=spaces=4 --suffix=none *.c *.h

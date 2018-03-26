@@ -6,13 +6,13 @@
 #define OUT_CPY_FILE "cpy_freq.txt"
 #define MAX 256
 
-double hi_bound = 0.0021;
+double hi_bound = 0.00021;
 double n = 10;
 
 int get_idx(double time)
 {
     int idx = (int)((time * n) / hi_bound);
-    return idx > n ? n : idx;
+    return idx > n - 1 ? n - 1 : idx;
 }
 double get_low_bound(int idx)
 {
